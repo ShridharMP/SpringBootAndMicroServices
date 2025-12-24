@@ -1,0 +1,51 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+                             http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- Parent project coordinates -->
+    <groupId>com.patil.software.solutions</groupId>
+    <artifactId>SpringBootAndMicroServices</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>SpringBootAndMicroServices</name>
+	<description>SpringBootAndMicroServices Demo Project</description>
+
+    <!-- Common dependency management -->
+    <dependencyManagement>
+        <dependencies>
+            <!-- Spring Boot BOM for consistent versions -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>3.2.0</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <!-- Modules -->
+    <modules>
+        <module>ServiceRegistry</module>
+        <module>APIGateway</module>
+        <module>ConfigServer</module>
+        <module>ProductService</module>
+        <module>OrderService</module>
+        <module>PaymentService</module>
+    </modules>
+
+    <!-- Build plugins -->
+    <build>
+        <pluginManagement>
+            <plugins>
+                <!-- Spring Boot Maven Plugin -->
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+</project>

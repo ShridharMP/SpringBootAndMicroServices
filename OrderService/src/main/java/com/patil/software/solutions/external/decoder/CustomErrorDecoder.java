@@ -3,7 +3,7 @@ package com.patil.software.solutions.external.decoder;
 import java.io.IOException;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.patil.software.solutions.external.client.exception.CustomException;
+import com.patil.software.solutions.exception.CustomException;
 import com.patil.software.solutions.external.response.ErrorResponse;
 
 import feign.Response;

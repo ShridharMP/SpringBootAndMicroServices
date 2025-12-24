@@ -5,8 +5,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import com.patil.software.solutions.external.client.exception.CustomException;
-import com.patil.software.solutions.external.client.request.PaymentRequest;
+import com.patil.software.solutions.exception.CustomException;
+import com.patil.software.solutions.external.request.PaymentRequest;
 
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 

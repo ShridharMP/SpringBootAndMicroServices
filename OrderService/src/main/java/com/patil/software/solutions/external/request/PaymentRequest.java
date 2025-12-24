@@ -1,4 +1,4 @@
-package com.patil.software.solutions.external.client.request;
+package com.patil.software.solutions.external.request;
 
 import com.patil.software.solutions.model.PaymentMode;
 

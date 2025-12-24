@@ -6,12 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import com.patil.software.solutions.ProductService.model.ProductResponse;
+import com.patil.software.solutions.model.ProductResponse;
 import com.patil.software.solutions.entity.Order;
 import com.patil.software.solutions.external.client.PaymentService;
 import com.patil.software.solutions.external.client.ProductService;
-import com.patil.software.solutions.external.client.exception.CustomException;
-import com.patil.software.solutions.external.client.request.PaymentRequest;
+import com.patil.software.solutions.exception.CustomException;
+import com.patil.software.solutions.external.request.PaymentRequest;
 import com.patil.software.solutions.external.response.PaymentResponse;
 import com.patil.software.solutions.model.OrderRequest;
 import com.patil.software.solutions.model.OrderResponse;
@@ -37,11 +37,11 @@ public class OrderServiceImpl implements OrderService {
 
 	@Override
 	public long placeOrder(OrderRequest orderRequest) {
-		log.info("Placing Oredr: {}", orderRequest);
+		//log.info("Placing Oredr: {}", orderRequest);
 
 		productSrvice.reduceProductQuantity(orderRequest.getProductId(), orderRequest.getQuantity());
 
-		log.info("Creating Oredr with status CREATED");
+		//log.info("Creating Oredr with status CREATED");
 
 		Order order = Order.builder().amount(orderRequest.getTotalAmount()).orderStatus("CREATED")
 				.productId(orderRequest.getProductId()).orderDate(Instant.now()).quantity(orderRequest.getQuantity())
@@ -49,9 +49,9 @@ public class OrderServiceImpl implements OrderService {
 
 		order = orderRepository.save(order);
 
-		log.info("Order Placed Successfully with Order ID: {}", order.getId());
+		//log.info("Order Placed Successfully with Order ID: {}", order.getId());
 
-		log.info("Calling Payment Service to complete the payment");
+		//log.info("Calling Payment Service to complete the payment");
 
 		PaymentRequest paymentRequest = PaymentRequest.builder().amount(orderRequest.getTotalAmount())
 				.paymentMode(orderRequest.getPaymentMode()).orderId(order.getId()).build();
@@ -59,10 +59,10 @@ public class OrderServiceImpl implements OrderService {
 		String orderStatus = null;
 		try {
 			paymentService.doPayment(paymentRequest);
-			log.info("Payment Successfully Complted");
+			//log.info("Payment Successfully Complted");
 			orderStatus = "Success";
 		} catch (Exception e) {
-			log.info("Payment Failed");
+			//log.info("Payment Failed");
 			orderStatus = "PAYMENT_FAILED";
 		}
 		order.setOrderStatus(orderStatus);
@@ -76,7 +76,7 @@ public class OrderServiceImpl implements OrderService {
 		Order order = orderRepository.findById(orderId).orElseThrow(
 				() -> new CustomException("Order not found for the given id:" + orderId, "NOT_FOUND", 404));
 
-		log.info("Product Details getting called from OrderService using RestTemplate");
+		//log.info("Product Details getting called from OrderService using RestTemplate");
 
 		ProductResponse productResponse = restTemplate
 				.getForObject("http://PRODUCT-SERVICE/product/" + order.getProductId(), ProductResponse.class);
@@ -98,5 +98,4 @@ public class OrderServiceImpl implements OrderService {
 				.paymentDetails(paymentDetails).build();
 		return orderResponse;
 	}
-
 }

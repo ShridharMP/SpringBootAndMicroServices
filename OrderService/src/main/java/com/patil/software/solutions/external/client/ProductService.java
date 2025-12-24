@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.patil.software.solutions.external.client.exception.CustomException;
+import com.patil.software.solutions.exception.CustomException;
 
 @FeignClient(name = "PRODUCT-SERVICE/product")
 public interface ProductService {

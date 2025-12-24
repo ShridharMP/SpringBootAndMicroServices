@@ -4,13 +4,12 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Data
-@EqualsAndHashCode(callSuper = true)
 public class ProductServiceCustomException extends RuntimeException {
 	private static final long serialVersionUID = -950437306568833246L;
-	private String errorMessageCode;
+	private String errorCode;
 
-	public ProductServiceCustomException(String message, String errorMessageCode) {
+	public ProductServiceCustomException(String message, String errorCode) {
 		super(message);
-		this.errorMessageCode = errorMessageCode;
+		this.errorCode = errorCode;
 	}
 }

@@ -5,15 +5,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
-
 import com.patil.software.solutions.ProductService.model.ErrorResponse;
 
 @ControllerAdvice
-public class ProductServiceExceptionHandler extends ResponseEntityExceptionHandler {
+public class RestResponseEntityExceptionHandler  extends ResponseEntityExceptionHandler {
 
 	@ExceptionHandler(ProductServiceCustomException.class)
 	public ResponseEntity<ErrorResponse> handleProductServiceException(ProductServiceCustomException exception) {
-		return new ResponseEntity<>(ErrorResponse.builder().errorMessage(exception.getMessage())
-				.errorcode(exception.getErrorMessageCode()).build(), HttpStatus.NOT_FOUND);
+		return new ResponseEntity<>(new ErrorResponse().builder()
+				.errorMessage(exception.getMessage())
+				.errorcode(exception.getErrorCode())
+				.build(), HttpStatus.NOT_FOUND);
 	}
 }
